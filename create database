@@ -1,0 +1,4 @@
+delimiter $$
+
+CREATE DATABASE `uni_friend` /*!40100 DEFAULT CHARACTER SET utf8 */$$
+
