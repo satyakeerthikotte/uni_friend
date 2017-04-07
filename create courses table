@@ -1,0 +1,12 @@
+delimiter $$
+
+CREATE TABLE `courses` (
+  `number` varchar(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text,
+  `department` varchar(45) NOT NULL,
+  `program` varchar(45) NOT NULL,
+  `keyword` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
+
