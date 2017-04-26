@@ -27,7 +27,8 @@ def index(request):
     return render(request, 'uni_friend-frontend/index.html')
 
 def job(request):
-    return render(request, 'uni_friend-frontend/courserec.html')
+    all_j = jobs.objects.all()
+    return render(request, 'uni_friend-frontend/courserec.html',{'all_jobs': all_j})
 
 def recommend(request,job_id):
     rec_courses = []
