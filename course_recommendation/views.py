@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from.models import jobs,courses
+from django.http import JsonResponse
+# from rest_framework import viewsets
 import re
 import logging, logging.config
 import sys
@@ -30,13 +32,21 @@ def job(request):
     all_j = jobs.objects.all()
     return render(request, 'uni_friend-frontend/courserec.html',{'all_jobs': all_j})
 
+def test(request,job_id):
+    # id=request.GET.get('id',None)
+    data={
+
+        'id':1
+    }
+    return JsonResponse(data)
+
 def recommend(request,job_id):
     rec_courses = []
     recommend_courses=[]
     dict={}
-    job = get_object_or_404(jobs,pk=job_id)
-    job = job.description.lower()
-    job_list = re.split(', | | ,|,|-|\\. |\\.|: |:|; |;', job)
+    jobfull = get_object_or_404(jobs,pk=job_id)
+    jobdesc = jobfull.description.lower()
+    job_list = re.split(', | | ,|,|-|\\. |\\.|: |:|; |;', jobdesc)
     keywrods={'CMPE 226':['c', 'python'], 'CMPE 225':['java'], 'CMPE 207': ['tcp', 'ip', 'ssl']}
     a_list=keywrods.keys()
     for i in job_list:
@@ -52,5 +62,14 @@ def recommend(request,job_id):
         if (dict.values()[l]) >= 2:
             recommend_courses.append(courses.objects.filter(number=dict.keys()[l] ))
 
-    return  render(request, 'uni_friend-frontend/courserec.html', {'filter_courses': recommend_courses})
+    data={
+        'job':jobfull,
+        'filter_courses':recommend_courses,
+        'len':len(recommend_courses),
+    }
+
+    return JsonResponse(data)
+
+    # return  render(request, 'uni_friend-frontend/jobpopup.html',{'jobs': jobfull ,'filter_courses': recommend_courses })
+
 

@@ -7,7 +7,7 @@ class jobs(models.Model):
     latitude = models.FloatField(max_length=150,null=True)
     longitude = models.FloatField(max_length=150,null=True)
     def __str__(self):
-        return self.Jobtitle+'-' +self.company+'-'+self.description+''
+        return self.Jobtitle+'-' +self.company+'-'+self.description+'-'+self.latitude+'-'+self.longitude
 
 class courses(models.Model):
     number=models.CharField(max_length=11)

@@ -12,7 +12,8 @@ app_name='course_recommendation'
 urlpatterns= [
     url(r'^$', views.index, name='index'),
     url(r'^job/$', views.job, name='job'),
-    url(r'^(?P<job_id>[0-9]+)/$', views.recommend, name='recommend'),
+    url(r'^job/(?P<job_id>[0-9]+)/$', views.recommend, name='recommend'),
+    url(r'^job/ajax/getData/(?P<job_id>[0-9]+)/$',views.test,name='test')
 ]
 
 
